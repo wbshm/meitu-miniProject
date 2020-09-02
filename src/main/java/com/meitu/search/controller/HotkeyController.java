@@ -5,10 +5,14 @@ import com.meitu.search.bean.HotkeyConfig;
 import com.meitu.search.constant.CommonConstant;
 import com.meitu.search.entity.ResultEntity;
 import com.meitu.search.service.impl.HotkeyConfigServiceImpl;
-import org.omg.CORBA.portable.ResponseHandler;
+import com.meitu.search.vo.HotkeyConfigVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @ClassName SearchController
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date 2020/9/1 20:23
  */
 @RestController
+@CrossOrigin("http://localhost:9528")
 public class HotkeyController {
     private final HotkeyConfigServiceImpl hotkeyConfigService;
 
@@ -28,10 +33,20 @@ public class HotkeyController {
      * 查询
      */
     @RequestMapping(value = "/admin/hotkey", method = RequestMethod.GET)
-    public ResultEntity<PageInfo<HotkeyConfig>> getList(@RequestParam(value = "page", defaultValue = "0") int page) {
+    public ResultEntity<PageInfo<HotkeyConfigVO>> getList(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                          @RequestParam(value = "limit", defaultValue = "10") int pageSize) {
         page = Math.max(page, CommonConstant.COMMON_PAGE_NUM_MIN);
-        PageInfo<HotkeyConfig> all = hotkeyConfigService.getAll(page, CommonConstant.COMMON_PAGE_SIZE);
-        return ResultEntity.successWithData(all);
+        pageSize = Math.max(pageSize, CommonConstant.COMMON_PAGE_SIZE);
+        PageInfo<HotkeyConfig> all = hotkeyConfigService.selectAll(page, pageSize);
+        List<HotkeyConfig> list = all.getList();
+        List<HotkeyConfigVO> voList = new ArrayList<>();
+        for (HotkeyConfig config : list) {
+            voList.add(new HotkeyConfigVO(config));
+        }
+        PageInfo<HotkeyConfigVO> rtn = new PageInfo<>();
+        BeanUtils.copyProperties(all, rtn);
+        rtn.setList(voList);
+        return ResultEntity.successWithData(rtn);
     }
 
 
@@ -42,27 +57,44 @@ public class HotkeyController {
      * @return
      */
     @RequestMapping(value = "/admin/hotkey", method = RequestMethod.POST)
-    public ResultEntity<String> add(HotkeyConfig hotkeyConfig, HttpServletResponse response) {
-        System.out.println(hotkeyConfig);
-        return null;
+    public ResultEntity<HotkeyConfigVO> add(@RequestBody HotkeyConfigVO hotkeyConfigVo, HttpServletResponse response) {
+        if (Objects.isNull(hotkeyConfigVo)) {
+            response.setStatus(CommonConstant.STATUS_CODE_NOT_FOUND_UNPROCESABLE_ENTITY);
+            return ResultEntity.failed(CommonConstant.ERR_ILLEGAL_PARAM);
+        }
+        HotkeyConfig config = new HotkeyConfig(hotkeyConfigVo);
+        HotkeyConfig beforeInsert = hotkeyConfigService.selectOneByKey(config.getSearchKey());
+        if(!Objects.isNull(beforeInsert)){
+            return ResultEntity.failed("Key值重复");
+        }
+        boolean insert = hotkeyConfigService.insert(config);
+        if (insert) {
+            response.setStatus(CommonConstant.STATUS_CODE_SUCCESS_CREATED);
+            return ResultEntity.successWithoutData();
+        } else {
+            response.setStatus(CommonConstant.STATUS_CODE_ERROR);
+            return ResultEntity.failed("暂无修改");
+        }
     }
 
     /**
      * 根据ID更新对应的HotkeyConfig
      *
-     * @param id
-     * @param hotkeyConfig
      * @return
      */
     @RequestMapping(value = "/admin/hotkey/{id}", method = {RequestMethod.PUT, RequestMethod.POST})
-    public ResultEntity<String> modify(
-            @PathVariable("id") int id,
-            HotkeyConfig hotkeyConfig) {
-        if (id <= 0 || hotkeyConfig.getId() != id) {
+    public ResultEntity<String> modify(@PathVariable("id") int id,
+                                       @RequestBody HotkeyConfigVO hotkeyConfigVo,HttpServletResponse response) {
+        if (id <= 0 || hotkeyConfigVo.getId() != id) {
             return ResultEntity.failed(CommonConstant.ERR_ILLEGAL_PARAM);
         }
-        hotkeyConfigService.update(hotkeyConfig);
-        return ResultEntity.successWithData("");
+        boolean update = hotkeyConfigService.update(new HotkeyConfig(hotkeyConfigVo));
+        if (update) {
+            return ResultEntity.successWithData("");
+        } else {
+            response.setStatus(CommonConstant.STATUS_CODE_ERROR);
+            return ResultEntity.failed(CommonConstant.SYSTEM_ERR);
+        }
     }
 
 

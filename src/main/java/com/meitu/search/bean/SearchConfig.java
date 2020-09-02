@@ -1,5 +1,7 @@
 package com.meitu.search.bean;
 
+import com.meitu.search.vo.SearchConfigVO;
+
 import java.util.Date;
 
 public class SearchConfig {
@@ -14,6 +16,18 @@ public class SearchConfig {
     private Date createDate;
 
     private Date updateDate;
+
+    public SearchConfig() {
+    }
+
+    public SearchConfig(SearchConfigVO vo) {
+        this.setId(vo.getId());
+        this.setConfigKey(vo.getConfigKey());
+        this.setConfigValue(vo.getConfigValue());
+        this.setConfigTitle(vo.getConfigTitle());
+        this.setCreateDate(new Date(vo.getCreateDate()));
+        this.setUpdateDate(new Date(vo.getUpdateDate()));
+    }
 
     public Integer getId() {
         return id;

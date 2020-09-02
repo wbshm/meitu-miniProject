@@ -20,14 +20,21 @@ public interface IHotkeyConfigService {
      * @param pageNum
      * @return
      */
-    PageInfo<HotkeyConfig> getAll(int pageSize, int pageNum);
+    PageInfo<HotkeyConfig> selectAll(int pageSize, int pageNum);
 
     /**
      * 获取关键词排行
-     *
+     * @param limit  int
      * @return
      */
-    List<HotkeyConfig> getRankList(int limit);
+    List<HotkeyConfig> selectRankList(int limit);
+
+    /**
+     * 根据ID获取HotkeyConfig
+     * @param key
+     * @return
+     */
+    HotkeyConfig selectOneByKey(String key);
 
     /**
      * 新增一条数据

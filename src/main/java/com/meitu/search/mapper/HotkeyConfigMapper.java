@@ -61,10 +61,10 @@ public interface HotkeyConfigMapper {
     /**
      * 根据ID 查询对应的数据
      *
-     * @param id id
+     * @param key String
      * @return SearchConfig
      */
-    @Select("SELECT id, search_key, key_status, key_order, start_time, end_time, create_date, update_date FROM hotkey_config WHERE id = #{id}")
+    @Select("SELECT id, search_key, key_status, key_order, start_time, end_time, create_date, update_date FROM hotkey_config WHERE search_key = #{key} limit 1")
     @Results({
             @Result(property = "searchKey", column = "search_key"),
             @Result(property = "keyStatus", column = "key_status"),
@@ -74,7 +74,7 @@ public interface HotkeyConfigMapper {
             @Result(property = "createDate", column = "create_date"),
             @Result(property = "updateDate", column = "update_date"),
     })
-    HotkeyConfig selectOneById(int id);
+    HotkeyConfig selectOneByKey(String key);
 
     /**
      * 插入数据

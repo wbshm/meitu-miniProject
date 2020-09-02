@@ -41,6 +41,7 @@ class SearchConfigMapperTest {
     @Test
     void update() {
         SearchConfig test = searchConfigMapper.selectOneByKey("test");
+        System.out.println(test);
         test.setConfigValue("321");
         boolean update = searchConfigMapper.update(test);
         assertTrue(update);

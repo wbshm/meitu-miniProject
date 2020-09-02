@@ -1,10 +1,14 @@
-package com.meitu.search.bean;
+package com.meitu.search.vo;
 
-import com.meitu.search.vo.HotkeyConfigVO;
+import com.meitu.search.bean.HotkeyConfig;
 
-import java.util.Date;
-
-public class HotkeyConfig {
+/**
+ * @ClassName HotkeyConfigVO
+ * @Description TODO
+ * @Author wangrq
+ * @Date 2020/9/2 18:06
+ */
+public class HotkeyConfigVO {
     private Integer id;
 
     private String searchKey;
@@ -13,28 +17,27 @@ public class HotkeyConfig {
 
     private Byte keyOrder;
 
-    private Date startTime;
+    private long startTime;
 
-    private Date endTime;
+    private long endTime;
 
-    private Date createDate;
+    private long createDate;
 
-    private Date updateDate;
+    private long updateDate;
 
-    public HotkeyConfig() {
+    public HotkeyConfigVO() {
     }
 
-    public HotkeyConfig(HotkeyConfigVO vo) {
-        this.setId(vo.getId());
-        this.setKeyOrder(vo.getKeyOrder());
-        this.setSearchKey(vo.getSearchKey());
-        this.setKeyStatus(vo.getKeyStatus());
-        this.setEndTime(new Date(vo.getEndTime()));
-        this.setStartTime(new Date(vo.getStartTime()));
-        this.setCreateDate(new Date(vo.getCreateDate()));
-        this.setUpdateDate(new Date(vo.getUpdateDate()));
+    public HotkeyConfigVO(HotkeyConfig config) {
+        this.setId(config.getId());
+        this.setSearchKey(config.getSearchKey());
+        this.setKeyStatus(config.getKeyStatus());
+        this.setKeyOrder(config.getKeyOrder());
+        this.setUpdateDate(config.getUpdateDate().getTime());
+        this.setCreateDate(config.getCreateDate().getTime());
+        this.setEndTime(config.getEndTime().getTime());
+        this.setStartTime(config.getStartTime().getTime());
     }
-
 
     public Integer getId() {
         return id;
@@ -49,7 +52,7 @@ public class HotkeyConfig {
     }
 
     public void setSearchKey(String searchKey) {
-        this.searchKey = searchKey == null ? null : searchKey.trim();
+        this.searchKey = searchKey;
     }
 
     public Byte getKeyStatus() {
@@ -68,41 +71,41 @@ public class HotkeyConfig {
         this.keyOrder = keyOrder;
     }
 
-    public Date getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 
-    public Date getCreateDate() {
+    public long getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(long createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdateDate() {
+    public long getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(long updateDate) {
         this.updateDate = updateDate;
     }
 
     @Override
     public String toString() {
-        return "SearchConfig{" +
+        return "HotkeyConfigVO{" +
                 "id=" + id +
                 ", searchKey='" + searchKey + '\'' +
                 ", keyStatus=" + keyStatus +

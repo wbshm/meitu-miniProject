@@ -13,9 +13,14 @@ public class CommonConstant {
     public static final String ERR_ILLEGAL_PARAM = "输入的参数有误";
 
     /**
+     * 非法请求参数的提示信息
+     */
+    public static final String SYSTEM_ERR = "系统繁忙，请稍后重试";
+
+    /**
      * 后台默认的页面大小
      */
-    public static final int COMMON_PAGE_SIZE = 20;
+    public static final int COMMON_PAGE_SIZE = 10;
 
     /**
      * 页码最小的值

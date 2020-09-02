@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,12 +40,6 @@ class HotkeyConfigMapperTest {
     }
 
     @Test
-    void selectOneById() {
-        HotkeyConfig hotkeyConfig = hotkeyConfigMapper.selectOneById(2);
-        assertNotNull(hotkeyConfig);
-    }
-
-    @Test
     void insert() {
         HotkeyConfig hotkeyConfig = newInstanceHotkeyConfig();
         boolean insert = hotkeyConfigMapper.insert(hotkeyConfig);
@@ -55,7 +48,7 @@ class HotkeyConfigMapperTest {
 
     @Test
     void update() {
-        HotkeyConfig hotkeyConfig = hotkeyConfigMapper.selectOneById(2);
+        HotkeyConfig hotkeyConfig = hotkeyConfigMapper.selectOneByKey("test");
         hotkeyConfig.setKeyStatus((byte) 1);
         boolean update = hotkeyConfigMapper.update(hotkeyConfig);
         assertTrue(update);

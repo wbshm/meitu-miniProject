@@ -70,12 +70,12 @@ public interface SearchConfigMapper {
      * @param config
      */
     @Update("update search_config" +
-            "set config_key = #{configKey,jdbcType=VARCHAR}," +
-            "  config_value = #{configValue,jdbcType=VARCHAR}," +
-            "  config_title = #{configTitle,jdbcType=VARCHAR}," +
-            "  create_date = #{createDate,jdbcType=TIMESTAMP}," +
-            "  update_date = #{updateDate,jdbcType=TIMESTAMP}" +
-            "where id = #{id,jdbcType=INTEGER}")
+            " set config_key = #{configKey,jdbcType=VARCHAR}," +
+            " config_value = #{configValue,jdbcType=VARCHAR}," +
+            " config_title = #{configTitle,jdbcType=VARCHAR}," +
+            " create_date = #{createDate,jdbcType=TIMESTAMP}," +
+            " update_date = #{updateDate,jdbcType=TIMESTAMP}" +
+            " where id = #{id,jdbcType=INTEGER}")
     boolean update(SearchConfig config);
 
     /**
