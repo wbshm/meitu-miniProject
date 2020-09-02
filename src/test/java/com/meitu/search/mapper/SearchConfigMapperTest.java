@@ -3,7 +3,6 @@ package com.meitu.search.mapper;
 import com.meitu.search.bean.SearchConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.logging.LoggerGroups;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;

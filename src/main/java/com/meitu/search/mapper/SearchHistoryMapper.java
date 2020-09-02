@@ -1,6 +1,7 @@
 package com.meitu.search.mapper;
 
 import com.meitu.search.bean.SearchConfig;
+import com.meitu.search.bean.SearchHistory;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -29,17 +30,19 @@ public interface SearchHistoryMapper {
             "group by search_key " +
             "limit #{limit,jdbcType=INTEGER}")
     @Results({
-            @Result(property = "configKey", column = "config_key"),
+            @Result(property = "countNum", column = "count_num"),
+            @Result(property = "searchKey", column = "search_key"),
+            @Result(property = "createDate", column = "create_date"),
     })
-    List<SearchConfig> countNumListByDate(Date date, int limit);
+    List<SearchHistory> countNumListByDate(Date date, int limit);
 
     /**
      * 插入数据
      *
-     * @param config SearchConfig配置信息
+     * @param history history
      * @return boolean
      */
     @Insert("insert into search_history (search_key, create_date)" +
             "values (#{searchKey,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})")
-    boolean insert(SearchConfig config);
+    boolean insert(SearchHistory history);
 }

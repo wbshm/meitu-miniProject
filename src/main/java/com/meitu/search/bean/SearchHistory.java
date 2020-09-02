@@ -42,4 +42,14 @@ public class SearchHistory {
     public void setCountNum(int countNum) {
         this.countNum = countNum;
     }
+
+    @Override
+    public String toString() {
+        return "SearchHistory{" +
+                "id=" + id +
+                ", searchKey='" + searchKey + '\'' +
+                ", countNum=" + countNum +
+                ", createDate=" + createDate +
+                '}';
+    }
 }
