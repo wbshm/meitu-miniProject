@@ -1,4 +1,4 @@
-package com.meitu.search.api;
+package com.meitu.search.controller.api;
 
 import com.meitu.search.bean.HotkeyConfig;
 import com.meitu.search.entity.ResultEntity;

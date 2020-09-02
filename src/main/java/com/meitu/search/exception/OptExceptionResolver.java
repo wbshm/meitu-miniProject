@@ -1,6 +1,7 @@
 package com.meitu.search.exception;
 
 import com.google.gson.Gson;
+import com.meitu.search.constant.CommonConstant;
 import com.meitu.search.entity.ResultEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,6 +27,7 @@ public class OptExceptionResolver {
         Gson gson = new Gson();
         String json = gson.toJson(failed);
         // 将json字符串作为响应体返回给前端
+        response.setStatus(CommonConstant.STATUS_CODE_ERROR);
         response.getWriter().write(json);
     }
 }
