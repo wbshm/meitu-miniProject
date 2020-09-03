@@ -10,7 +10,6 @@ import com.meitu.search.service.IHotkeyConfigService;
 import com.meitu.search.service.ISearchConfigService;
 import com.meitu.search.service.ISearchHistoryService;
 import com.meitu.search.util.StringUtil;
-import com.meitu.search.vo.HotkeyConfigVO;
 import com.meitu.search.vo.SearchHistoryVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -116,6 +115,13 @@ public class HotkeyApi {
         return rtn;
     }
 
+    /**
+     * 搜索接口，新增一条搜索记录。
+     *
+     * @param key
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/api/search", method = RequestMethod.GET)
     public ResultEntity<String> search(@RequestParam(value = "key", defaultValue = "") String key, HttpServletResponse response) {
         if (StringUtil.isEmpty(key)) {

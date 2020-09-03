@@ -3,7 +3,6 @@ package com.meitu.search.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.meitu.search.bean.HotkeyConfig;
-import com.meitu.search.bean.SearchConfig;
 import com.meitu.search.constant.CommonConstant;
 import com.meitu.search.exception.OptException;
 import com.meitu.search.mapper.HotkeyConfigMapper;
