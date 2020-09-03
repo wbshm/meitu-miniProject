@@ -46,6 +46,8 @@ public class SearchHistoryServiceImpl implements ISearchHistoryService {
         if (Objects.isNull(history)) {
             throw new OptException(CommonConstant.ERR_ILLEGAL_PARAM);
         }
+        Date now = new Date();
+        history.setCreateDate(now);
         return searchHistoryMapper.insert(history);
     }
 }

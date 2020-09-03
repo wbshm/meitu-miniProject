@@ -45,7 +45,7 @@ public class CommonConstant {
      */
     public static final int STATUS_CODE_NOT_FOUND_GONE = 410;
     /**
-     * 当创建一个对象时，发生一个验证错误
+     * 发生一个验证错误
      */
     public static final int STATUS_CODE_NOT_FOUND_UNPROCESABLE_ENTITY = 422;
     /**

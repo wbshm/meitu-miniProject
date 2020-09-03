@@ -3,6 +3,7 @@ package com.meitu.search.service;
 import com.github.pagehelper.PageInfo;
 import com.meitu.search.bean.HotkeyConfig;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,13 +25,15 @@ public interface IHotkeyConfigService {
 
     /**
      * 获取关键词排行
-     * @param limit  int
+     *
+     * @param limit int
      * @return
      */
     List<HotkeyConfig> selectRankList(int limit);
 
     /**
      * 根据ID获取HotkeyConfig
+     *
      * @param key
      * @return
      */

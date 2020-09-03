@@ -28,6 +28,7 @@ public interface SearchHistoryMapper {
     @Select("SELECT count(1) as count_num, search_key from search_history where " +
             "create_date>= #{date,jdbcType=TIMESTAMP} " +
             "group by search_key " +
+            "order by count_num DESC " +
             "limit #{limit,jdbcType=INTEGER}")
     @Results({
             @Result(property = "countNum", column = "count_num"),

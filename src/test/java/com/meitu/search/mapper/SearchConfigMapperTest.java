@@ -26,14 +26,12 @@ class SearchConfigMapperTest {
     @Test
     void selectOneByKey() {
         SearchConfig test = searchConfigMapper.selectOneByKey("test");
-        System.out.println(test);
         assertNotNull(test);
     }
 
     @Test
     void insert() {
         SearchConfig searchConfig = newInstanceSearchConfig();
-        System.out.println(searchConfig);
         boolean insert = searchConfigMapper.insert(searchConfig);
         assertTrue(insert);
     }

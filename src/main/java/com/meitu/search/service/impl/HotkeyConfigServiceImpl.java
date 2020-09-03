@@ -33,9 +33,7 @@ public class HotkeyConfigServiceImpl implements IHotkeyConfigService {
     public PageInfo<HotkeyConfig> selectAll(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<HotkeyConfig> hotkeyConfigs = hotkeyConfigMapper.selectAll();
-        System.out.println(hotkeyConfigs);
         PageInfo<HotkeyConfig> hotkeyConfigPageInfo = new PageInfo<>(hotkeyConfigs);
-        System.out.println(hotkeyConfigPageInfo);
         return hotkeyConfigPageInfo;
     }
 

@@ -11,6 +11,14 @@ public class SearchHistory {
 
     private Date createDate;
 
+    public SearchHistory() {
+    }
+
+    public SearchHistory(HotkeyConfig config) {
+        this.setSearchKey(config.getSearchKey());
+    }
+
+
     public Integer getId() {
         return id;
     }

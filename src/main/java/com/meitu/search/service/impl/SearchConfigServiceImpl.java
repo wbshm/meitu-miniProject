@@ -10,6 +10,7 @@ import com.meitu.search.service.ISearchConfigService;
 import com.meitu.search.util.StringUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +51,9 @@ public class SearchConfigServiceImpl implements ISearchConfigService {
         if (Objects.isNull(config) || StringUtil.isEmpty(config.getConfigKey())) {
             throw new OptException(CommonConstant.ERR_ILLEGAL_PARAM);
         }
+        Date now = new Date();
+        config.setCreateDate(now);
+        config.setUpdateDate(now);
         return searchConfigMapper.insert(config);
     }
 
@@ -58,6 +62,8 @@ public class SearchConfigServiceImpl implements ISearchConfigService {
         if (Objects.isNull(config) || config.getId() <= 0 || StringUtil.isEmpty(config.getConfigKey())) {
             throw new OptException(CommonConstant.ERR_ILLEGAL_PARAM);
         }
+        Date now = new Date();
+        config.setUpdateDate(now);
         return searchConfigMapper.update(config);
     }
 

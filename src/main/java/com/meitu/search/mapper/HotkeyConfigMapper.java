@@ -44,7 +44,7 @@ public interface HotkeyConfigMapper {
             "AND end_time> #{date,jdbcType=TIMESTAMP} " +
             "AND key_status=0 " +
             "AND key_order>0 " +
-            "order by key_order desc " +
+            "order by key_order asc " +
             "limit #{limit,jdbcType=INTEGER}")
     @Results({
             @Result(property = "searchKey", column = "search_key"),
