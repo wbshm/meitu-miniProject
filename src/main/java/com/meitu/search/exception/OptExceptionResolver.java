@@ -19,7 +19,7 @@ import java.io.IOException;
 @ControllerAdvice
 public class OptExceptionResolver {
     @ExceptionHandler(value = OptException.class)
-    public void optException(ArithmeticException exception,
+    public void optException(OptException exception,
                                            HttpServletRequest request,
                                            HttpServletResponse response) throws IOException {
         ResultEntity<Object> failed = ResultEntity.failed(exception.getMessage());
